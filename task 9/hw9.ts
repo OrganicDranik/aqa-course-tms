@@ -6,7 +6,7 @@
 class Animal {
   name: string;
 
-  static animalType = "Dog";
+  static animalType = "four paws";
 
   constructor(name: string) {
     this.name = name;
