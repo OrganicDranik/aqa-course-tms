@@ -13,7 +13,7 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "linebreak-style": ["error", "unix"],
-    "no-console": "error",
+    "no-console": "off",
     "prettier/prettier": "error"
   }
 }
