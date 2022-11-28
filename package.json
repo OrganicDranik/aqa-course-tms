@@ -1,0 +1,40 @@
+{
+  "name": "task2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prettier": "prettier --config .prettierrc **/*.ts --write",
+    "lint": "eslint **/*.ts",
+    "lint:fix": "eslint **/*.{ts,json} --quiet --fix",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OrganicDranik/task2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OrganicDranik/task2/issues"
+  },
+  "homepage": "https://github.com/OrganicDranik/task2#readme",
+  "lint-staged": {
+    "*.ts": [
+      "npm run prettier",
+      "npm run lint:fix",
+      "npm run lint"
+    ]
+  },
+  "devDependencies": {
+    "typescript": "^4.8.3",
+    "husky": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  }
+}
