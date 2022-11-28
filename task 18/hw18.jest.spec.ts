@@ -1,5 +1,5 @@
-// - Написать минимум 10 API тестов для разных HTTP методов.
-// Использовать Jest + superAgent
+// Написать минимум 10 API тестов для разных HTTP методов.
+// Использовать Jest + superAgent.
 
 import superagent from "superagent";
 
@@ -12,13 +12,13 @@ describe("#1: GET", function () {
 
 describe("#2: GET", function () {
   test("GET a user's email", async () => {
-    const res = await superagent.get("https://reqres.in/api/users?page=2");
-    expect(res.body.data[2].email).toBe("tobias.funke@reqres.in");
+    const res = await superagent.get("https://reqres.in/api/users/9");
+    expect(res.body.data.email.length).toBeTruthy();
   });
 });
 
 describe("#3: GET", function () {
-  test("Get an error", async () => {
+  test("Get: user not found", async () => {
     try {
       await superagent.get("https://reqres.in/api/users/23");
     } catch (error: any) {
@@ -28,10 +28,10 @@ describe("#3: GET", function () {
 });
 
 describe("#4: POST", function () {
-  test("Post a new user", async () => {
+  test("Create a new user", async () => {
     const newObject: { name: string; job: string } = {
-      name: "Liudmila",
-      job: "QA",
+      name: "morpheus",
+      job: "leader",
     };
     const res = await superagent
       .post("https://reqres.in/api/users")
@@ -43,13 +43,13 @@ describe("#4: POST", function () {
   });
 
   describe("#5: PUT", function () {
-    test("Put/update a new user", async () => {
+    test("Update the user", async () => {
       const newObject: { name: string; job: string } = {
-        name: "Svetlana",
-        job: "Programmer",
+        name: "morpheus",
+        job: "zion resident",
       };
       const res = await superagent
-        .post("https://reqres.in/api/users/4")
+        .post("https://reqres.in/api/users/2")
         .set("Content-Type", "application/json")
         .send({ name: newObject.name, job: newObject.job });
       expect(res.status).toEqual(201);
@@ -62,11 +62,11 @@ describe("#4: POST", function () {
 describe("#6: PATCH", function () {
   test("Update #2", async () => {
     const newObject: { name: string; job: string } = {
-      name: "Vladimir",
-      job: "Scrum master",
+      name: "morpheus",
+      job: "zion resident",
     };
     const res = await superagent
-      .post("https://reqres.in/api/users/5")
+      .post("https://reqres.in/api/users/2")
       .set("Content-Type", "application/json")
       .send({ name: newObject.name, job: newObject.job });
     expect(res.status).toEqual(201);
@@ -78,7 +78,7 @@ describe("#6: PATCH", function () {
 describe("#7: DELETE", function () {
   test("Delete a user", async () => {
     try {
-      await superagent.delete("https://reqres.in/api/users/5");
+      await superagent.delete("https://reqres.in/api/users/2");
     } catch (error: any) {
       expect(error.status).toBe(204);
     }
@@ -97,23 +97,23 @@ describe("#8: POST", function () {
       .send({ email: newObject.email, password: newObject.password });
     expect(res.status).toEqual(200);
     expect(res.body.id).toEqual(4);
-    expect(res.body.token).toEqual("QpwL5tke4Pnpja7X4"); // TOKEN
+    expect(res.body.token.length).toBeTruthy();
   });
 });
 
 describe("#9: POST", function () {
   test("POST: unsuccessful registration", async () => {
     const newObject: { email: string } = {
-      email: "peter@klaven",
+      email: "sydney@fife",
     };
     try {
       await superagent
-        .post("https://reqres.in/api/login")
+        .post("https://reqres.in/api/register")
         .set("Content-Type", "application/json")
         .send({ email: newObject.email });
     } catch (error: any) {
       expect(error.status).toEqual(400);
-      expect(error.response.body.error).toEqual("Missing password");
+      expect(error.response.body.error).toBe("Missing password");
     }
   });
 
