@@ -1,0 +1,5 @@
+{
+  "extension": ["ts"],
+  "spec": ["task 17/*.spec.ts"],
+  "require": ["ts-node/register"]
+}
